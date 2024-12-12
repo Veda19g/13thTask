@@ -142,3 +142,22 @@ export const AddOfficer = async (officer) => {
         return null;
     }
 }   
+
+export const getAllTasksOfficers = async () => {
+
+    try {
+        const response = await axios.get(`http://localhost:8000/api/v1/officer/get-all-tasks`, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        console.log("tasks", response.data);
+        return response.data
+
+    } catch (error) {
+        console.log("Error getting tasks:", error);
+        alert("Error getting tasks. Please try again.");
+        return [];
+    }
+}   

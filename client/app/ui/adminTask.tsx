@@ -44,7 +44,9 @@ export default function GetAllTasksAdmin() {
         router.push(`/admin/assign/${taskId}`);
     };
 
-
+    const handleUpdate = () => {
+        alert("admin can update the task")
+    }
     return (
         <div className="flex w-full">
             <div className="w-full p-8">
@@ -90,7 +92,7 @@ export default function GetAllTasksAdmin() {
                                             <button onClick={() => navigateToAssign(task._id)} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
                                                 Assign
                                             </button>
-                                            <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                                            <button onClick={handleUpdate} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
                                                 Update
                                             </button>
                                         </div>

@@ -31,6 +31,7 @@ export default function Login({ id }: { id: string }) {
         <div className="flex justify-center items-center h-screen bg-black">
             <div className="bg-white md:p-8 rounded-xl shadow-md md:w-96 p-5">
                 <h2 className="md:text-3xl font-bold mb-4 text-center text-black text-xl">Login</h2>
+                <p className="text-center text-2xl text-gray-600 mb-4">For Admin email:admin@abc.com password:Admin</p>
                 <p className="text-center text-2xl text-gray-600 mb-4">Login as: {id}</p> {/* Display the dynamic id */}
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
