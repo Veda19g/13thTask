@@ -5,7 +5,7 @@ import Cookies from 'js-cookie';
 export const login=async(user,id)=>{
     try {
 
-    const response = await axios.post(`http://localhost:8000/api/v1/${id}/login`, 
+    const response = await axios.post(`https://one3thtask.onrender.com/api/v1/${id}/login`, 
     user ,
     {
         withCredentials: true,
@@ -55,7 +55,7 @@ export const getUserData = async () => {
 export const getAllTasksAdmin = async () => {
     try {
         const user = await getUserData();
-        const response = await axios.get(`http://localhost:8000/api/v1/admin/get-all-tasks`, {
+        const response = await axios.get(`https://one3thtask.onrender.com/api/v1/admin/get-all-tasks`, {
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
@@ -73,7 +73,7 @@ export const getAllTasksAdmin = async () => {
 
 export const AddTask = async (task) => {
     try {
-        const response = await axios.post(`http://localhost:8000/api/v1/admin/create-task`, task, {
+        const response = await axios.post(`https://one3thtask.onrender.com/api/v1/admin/create-task`, task, {
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
@@ -91,7 +91,7 @@ export const AddTask = async (task) => {
 
 export const getAllOfficers = async () => {
     try {
-        const response = await axios.get(`http://localhost:8000/api/v1/officer/get-all-officers`, {
+        const response = await axios.get(`https://one3thtask.onrender.com/api/v1/officer/get-all-officers`, {
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
@@ -109,7 +109,7 @@ export const getAllOfficers = async () => {
 
 export const assignTask=async(taskId,officersId)=>{
     try {
-        const response = await axios.post(`http://localhost:8000/api/v1/admin/assign-task/${taskId}`, { officersId }, {
+        const response = await axios.post(`https://one3thtask.onrender.com/api/v1/admin/assign-task/${taskId}`, { officersId }, {
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
@@ -127,7 +127,7 @@ export const assignTask=async(taskId,officersId)=>{
 
 export const AddOfficer = async (officer) => {
     try {
-        const response = await axios.post(`http://localhost:8000/api/v1/admin/create-officer`, officer, {
+        const response = await axios.post(`https://one3thtask.onrender.com/api/v1/admin/create-officer`, officer, {
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
@@ -146,7 +146,7 @@ export const AddOfficer = async (officer) => {
 export const getAllTasksOfficers = async () => {
 
     try {
-        const response = await axios.get(`http://localhost:8000/api/v1/officer/get-all-tasks`, {
+        const response = await axios.get(`https://one3thtask.onrender.com/api/v1/officer/get-all-tasks`, {
             withCredentials: true,
             headers: {
                 "Content-Type": "application/json",
