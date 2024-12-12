@@ -1,0 +1,11 @@
+const express = require("express");
+const {createAdmin,loginAdmin,createOfficer,createTask,getAllTasks,assignTask}=require("../controllers/admin.controller");
+const {authMiddleware}=require("../middlewares/authmiddleware");
+const router=express.Router();
+router.post("/create",createAdmin);
+router.post("/login",loginAdmin);
+router.post("/create-officer",createOfficer);
+router.post("/create-task",authMiddleware,createTask);
+router.get("/get-all-tasks",authMiddleware,getAllTasks);
+router.post("/assign-task/:taskId",authMiddleware,assignTask);
+module.exports=router;

@@ -6,8 +6,8 @@ const TaskSchema = new mongoose.Schema({
     priority: { type: String, enum: ['Low', 'Medium', 'High'], default: 'Medium' },
     deadline: { type: Number },
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'Admin' }, // Admin reference
-    assignedToOfficer: { type: mongoose.Schema.Types.ObjectId, ref: 'Officer' }, // Officer reference
-    assignedToWorker: { type: mongoose.Schema.Types.ObjectId, ref: 'Worker' }, // Worker reference
+    assignedToOfficers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Officer' }], // Officer reference
+    assignedToWorkers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Worker' }], // Worker reference
     delegationHistory: [
       {
         assignedBy: { type: mongoose.Schema.Types.ObjectId, refPath: 'role' }, // Admin or Officer
