@@ -64,29 +64,49 @@ const createAdmin=async(req,res)=>{
 }
 }
     
-  const createTask=async(req,res)=>{
-    const {title,description}=req.body;
-    const createdBy=req.UserId;
-    try{
-        const TaskResponse=await Task.create({title,description,createdBy});
-        res.status(201).json({message:"task created successfully",task:TaskResponse});
-    }
-    catch(error){
-        console.log(error);
-        res.status(400).json({message:"error creating task",error});
-    }
-    }
+  const createTask = async (req, res) => {
+  const { title, description, status, priority, deadline } = req.body; // Extracting additional fields from request body
+  const createdBy = req.UserId; // Assuming UserId is extracted from the token middleware
 
-    const getAllTasks=async(req,res)=>{
-        try{
-           const tasks=await Task.find().populate('assignedToOfficer').populate('assignedToWorker');
-           res.status(200).json({tasks});
-        }
-        catch(error){
-            console.log(error);
-            res.status(500).json({message:"error getting all tasks",error});
-        }
-    }
+  try {
+      // Creating the task with all the provided fields
+      const task = await Task.create({
+          title,
+          description,
+          status: status || 'Pending', // Default to 'Pending' if not provided
+          priority: priority || 'Medium', // Default to 'Medium' if not provided
+          deadline,
+          createdBy,
+      });
+
+      res.status(201).json({
+          message: "Task created successfully",
+          task,
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(400).json({
+          message: "Error creating task",
+          error,
+      });
+  }
+     };
+
+     const getAllTasks = async (req, res) => {
+      try {
+          const tasks = await Task.find()
+              .populate({
+                  path: 'assignedToOfficers', // Path to the reference in Task schema
+                  select: 'name', // Select only the fields you want to include
+              });
+  
+          res.status(200).json({ tasks });
+      } catch (error) {
+          console.error(error);
+          res.status(500).json({ message: "Error getting all tasks", error });
+      }
+  };
+  
     
     const assignTask = async (req, res) => {
         const {taskId}  = req.params; // Extract task ID from params
