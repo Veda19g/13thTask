@@ -124,3 +124,21 @@ export const assignTask=async(taskId,officersId)=>{
         return null;
     }
 }
+
+export const AddOfficer = async (officer) => {
+    try {
+        const response = await axios.post(`http://localhost:8000/api/v1/admin/create-officer`, officer, {
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        console.log("officer created", response.data);
+        return response.data
+
+    } catch (error) {
+        console.log("Error creating officer:", error);
+        alert("Error creating officer. Please try again.");
+        return null;
+    }
+}   
