@@ -1,5 +1,5 @@
 const Officer=require('../models/officer.model');
-
+const Task=require('../models/task.model');
 const bcrypt = require('bcrypt');
 const mongoose = require('mongoose');
 const { generateAccessToken,generateRefreshToken } = require('../utils/auth');
@@ -45,6 +45,41 @@ const getAllOfficers=async(req,res)=>{
     }
 }
 
-const getAllTasks=async
 
-module.exports={officerLogin,getAllOfficers};
+
+const getAllTasks = async (req, res) => {
+  const officerId = req.userId; // Assuming userId is added to req object via middleware (e.g., JWT authentication)
+
+  try {
+    // Validate officerId format
+    if (!mongoose.Types.ObjectId.isValid(officerId)) {
+      return res.status(400).json({ message: "Invalid officer ID format" });
+    }
+
+    // Check if officer exists
+    const officer = await Officer.findById(officerId);
+    if (!officer) {
+      return res.status(404).json({ message: "Officer not found" });
+    }
+
+    // Fetch tasks where officerId exists in assignedToOfficers array
+    const tasks = await Task.find({ assignedToOfficers: { $in: [officerId] } });
+
+    // Return tasks in response
+    res.status(200).json({
+      message: "Tasks retrieved successfully",
+      tasks,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      message: "An error occurred while retrieving tasks",
+      error: error.message,
+    });
+  }
+};
+
+
+
+
+module.exports={officerLogin,getAllOfficers,getAllTasks};
